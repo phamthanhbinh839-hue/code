@@ -1,0 +1,43 @@
+RewriteEngine On
+<Files .env>
+    Order allow,deny
+    Deny from all
+</Files>
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+</IfModule>
+#Xử lý Route ADMIN
+
+RewriteRule ^admin/blog-edit/([A-Za-z0-9-]+) index.php?module=admin&action=blog-edit&id=$1 [L]
+RewriteRule ^admin/bank-edit/([A-Za-z0-9-]+) index.php?module=admin&action=bank-edit&id=$1 [L]
+RewriteRule ^admin/user-edit/([A-Za-z0-9-]+) index.php?module=admin&action=user-edit&id=$1 [L]
+RewriteRule ^admin/cron-edit/([A-Za-z0-9-]+) index.php?module=admin&action=cron-edit&id=$1 [L]
+RewriteRule ^admin/orders-cron-edit/([A-Za-z0-9-]+) index.php?module=admin&action=orders-cron-edit&id=$1 [L]
+RewriteRule ^admin/code-edit/([A-Za-z0-9-]+) index.php?module=admin&action=code-edit&id=$1 [L]
+RewriteRule ^admin/spam-sms-edit/([A-Za-z0-9-]+) index.php?module=admin&action=spam-sms-edit&id=$1 [L]
+RewriteRule ^admin/([A-Za-z0-9-]+) index.php?module=admin&action=$1 [L]
+RewriteRule ^admin index.php?module=admin&action= [L]
+#Xử lý Route CLIENT
+RewriteRule ^client/home/([A-Za-z0-9-]+) index.php?module=client&action=home&shop=$1 [L]
+RewriteRule ^client/giahan-cron/([A-Za-z0-9-]+) index.php?module=client&action=giahan-cron&id=$1 [L]
+RewriteRule ^client/edit-cron/([A-Za-z0-9-]+) index.php?module=client&action=edit-cron&id=$1 [L]
+RewriteRule ^client/view-code/([A-Za-z0-9-]+) index.php?module=client&action=view-code&id=$1 [L]
+RewriteRule ^client/cart/remove/([A-Za-z0-9-]+) index.php?module=client&action=cart&remove=$1 [L]
+RewriteRule ^client/cart/delete index.php?module=client&action=cart&delete [L]
+RewriteRule ^client/([A-Za-z0-9-]+) index.php?module=client&action=$1 [L]
+RewriteRule ^client index.php?module=client&action= [L]
+
+#Xử lý nạp tiền
+RewriteRule ^recharge/([A-Za-z0-9-]+) index.php?module=client&action=$1 [L]
+#Xử lý Route COMMON
+RewriteRule ^common/([A-Za-z0-9-]+) index.php?module=common&action=$1 [L]
+ErrorDocument 404 /404.php
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “alt-php74” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-alt-php74 .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
